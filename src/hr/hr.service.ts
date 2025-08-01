@@ -28,19 +28,7 @@ export class HrService {
     return record;
   }
 
-  updateHr(id: string, updateHrDto: CreateHrDto, file: Express.Multer.File) {
-    const index = this.hrData.findIndex(r => r.id === id);
-    if (index === -1) throw new NotFoundException('HR record not found');
-    
-    const updated = {
-      ...updateHrDto,
-      id,
-      nidImagePath: file?.path || this.hrData[index].nidImagePath,
-      updatedAt: new Date()
-    };
-    this.hrData[index] = updated;
-    return updated;
-  }
+  
 
   partialUpdateHr(id: string, partialUpdateHrDto: Partial<CreateHrDto>) {
     const index = this.hrData.findIndex(r => r.id === id);

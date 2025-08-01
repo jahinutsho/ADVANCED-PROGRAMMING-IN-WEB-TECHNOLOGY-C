@@ -4,6 +4,8 @@ import {  MaxLength } from 'class-validator';
 import { Express } from 'express';
 
 
+import { IsFile, MaxFileSize } from 'class-validator';
+
 export class CreateHrDto {
   @IsString()
   @IsNotEmpty()
@@ -18,6 +20,6 @@ export class CreateHrDto {
   @Matches(/^[A-Z]{2}\d{13}$/, { message: 'NID must be 2 uppercase letters followed by 13 digits' })
   nidNumber: string;
 
-  @MaxLength(2097152, { message: 'NID image exceeds 2MB limit' })
+  // File validation now handled by Multer configuration
   nidImage: Express.Multer.File;
 }

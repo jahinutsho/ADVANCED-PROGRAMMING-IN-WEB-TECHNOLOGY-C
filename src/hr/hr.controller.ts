@@ -30,22 +30,16 @@ export class HrController {
   }
 
   @Post()
-  @UseInterceptors(FileInterceptor('nidImage'))
+  @UseInterceptors(FileInterceptor('nidImage', {
+    limits: {
+      fileSize: 2 * 1024 * 1024 // 2MB
+    }
+  }))
   create(
     @Body() createHrDto: CreateHrDto,
     @UploadedFile() file: Express.Multer.File
   ) {
     return this.hrService.createHr(createHrDto, file);
-  }
-
-  @Put(':id')
-  @UseInterceptors(FileInterceptor('nidImage'))
-  update(
-    @Param('id') id: string,
-    @Body() updateHrDto: CreateHrDto,
-    @UploadedFile() file: Express.Multer.File
-  ) {
-    return this.hrService.updateHr(id, updateHrDto, file);
   }
 
   @Patch(':id')
