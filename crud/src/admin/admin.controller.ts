@@ -13,7 +13,8 @@ export class AdminController {
   }
 
   @Patch(':id/country')
-  updateCountry(@Param('id', new ParseIntPipe()) id: number, @Body('country') country: string): Promise<void> {
+  updateCountry(@Param('id', new ParseIntPipe({ errorHttpStatusCode: 400 })) id: number, 
+               @Body('country') country: string): Promise<void> {
     return this.adminService.updateCountry(id, country);
   }
 
