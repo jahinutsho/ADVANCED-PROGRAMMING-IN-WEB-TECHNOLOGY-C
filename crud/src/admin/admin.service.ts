@@ -25,8 +25,9 @@ export class AdminService {
     if (!admin) {
       throw new NotFoundException(`Admin with ID ${id} not found`);
     }
+    admin.country = country;
     try {
-      await this.adminRepository.update(id, { country });
+      await this.adminRepository.save(admin);
     } catch (error) {
       throw new InternalServerErrorException('Failed to update country');
     }
